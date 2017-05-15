@@ -33,31 +33,36 @@
 </html>
 
 <?php 
-	$tmp = "";
-	if ($_POST) {
-	$mike = explode(" ", $_POST['Mike']);
-	if (count($mike) < 3 ||count($mike) > 3) {
-		echo "Nombre de paramètres incorrect";
-	}
-	elseif(count($mike) == 3) {
-		if (floatval($mike[0]) > floatval($mike[1])) {
-				$tmp = $mike[0];
-				$mike[0] = $mike[1];
-				$mike[1] = $tmp;
-			}
-		if (floatval($mike[1]) > floatval($mike[2])) {
-				$tmp = $mike[1];
-				$mike[1] = $mike[2];
-				$mike[2] = $tmp;
-			}
-		if (floatval($mike[0]) > floatval($mike[1])) {
-				$tmp = $mike[0];
-				$mike[0] = $mike[1];
-				$mike[1] = $tmp;
+
+if ($_POST) {
+	$resultat_essence = 0;
+	$resultat_diesel = 0;
+	$distance_essence = 0;
+	$distance_diesel = 0;
+	$mike = trim($_POST['Mike']);
+	$mike = explode(" ", $mike);
+	if (count($mike) == 2) {
+		$distance = floatval($mike[0]);
+		$duree = floatval($mike[1]);
+		$distance_essence = $distance*0.13;
+		$distance_diesel = $distance*0.11;
+		$distance_essence < 10 ? $distance_essence = 10 : '' ;
+		$distance_diesel < 8 ? $distance_diesel = 8 : '' ;
+
+		$resultat_essence = ($duree * 30) + ($distance_essence);
+		$resultat_essence *=1.196;
+		$resultat_essence = round($resultat_essence, 2);
+		$resultat_diesel = ($duree * 33.4) + ($distance_diesel);
+		$resultat_diesel *= 1.196;
+		$resultat_diesel = round($resultat_diesel, 2);
+			echo "Distance : $distance kilomètres, Durée : $duree jours, Total diesel: $resultat_diesel €, Total essence: $resultat_essence € ";
+		if ($resultat_diesel > $resultat_essence) {
+			echo "Meilleur prix: Essence";
 		}
-		echo $mike[0] . " ";
-		echo $mike[1] . " ";
-		echo $mike[2] . " ";
+		else{
+			echo "Meilleur prix : Diesel";
+		}
 	}
 }
+
  ?>

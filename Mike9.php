@@ -32,8 +32,45 @@
 	</body>
 </html>
 
-<?php 
-
-
-
- ?>
+<?php
+if ($_POST) {
+	$mike = trim($_POST['Mike']);
+	$mike = explode(" ", $mike);
+	$resultat;
+	if ($mike[0] == 1) {
+		if (count($mike) == 3) {
+			if ($mike[1] < 9 && $mike[2] < 9 && $mike[1] > 0 && $mike[2] > 0) {	
+			intval($mike[2])%2 == 1 && intval($mike[1])%2 == 0 ||intval($mike[2])%2 == 0 && intval($mike[1])%2 == 1 ? $resultat = "bleue" : $resultat = "blanche";
+		}
+	}
+	echo $resultat;
+}
+	if ($mike[0] == 2) {
+		if (count($mike) == 5) {
+			if ($mike[3] == ($mike[1]-2) || $mike[3] == ($mike[1]+2)  ) {
+				if ($mike[4] == ($mike[2]-1) || $mike[4] == ($mike[2]+1)) {
+				$resultat = "Votre mouvement de cavalier du " . $mike[1] . " " . $mike[2] . " en " . $mike[3] . " " .  $mike[4] . " est valide" ;
+			}
+			else{
+				$resultat = "Votre mouvement de cavalier du " . $mike[1] . " " . $mike[2] . " en " . $mike[3] . " " .  $mike[4] . " est invalide" ;
+			}
+		}
+		else{
+				$resultat = "Votre mouvement de cavalier du " . $mike[1] . " " . $mike[2] . " en " . $mike[3] . " " .  $mike[4] . " est invalide" ;
+		}	
+	}			
+	if ($mike[3] == ($mike[1]-1) || $mike[3] == ($mike[1]+1)  ) {
+			if ($mike[4] == ($mike[2]-2) || $mike[4] == ($mike[2]+2)) {
+				$resultat = "Votre mouvement de cavalier du " . $mike[1] . " " . $mike[2] . " en " . $mike[3] . " " .  $mike[4] . " est valide " ;
+			}
+			else{
+				$resultat = "Votre mouvement de cavalier du " . $mike[1] . " " . $mike[2] . " en " . $mike[3] . " " .  $mike[4] . " est invalide" ;
+			}
+		}
+		else{
+				$resultat = "Votre mouvement de cavalier du " . $mike[1] . " " . $mike[2] . " en " . $mike[3] . " " .  $mike[4] . " est invalide" ;
+		}	
+	}
+	echo $resultat;
+}
+?>

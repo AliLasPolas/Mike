@@ -42,20 +42,9 @@ $octet4 = 0;
 
 if ($_POST) {
 $valeur = doubleval($_POST['Mike']);
-	while ($valeur > 256) {
-		$octet2++;
-		$valeur-=256;
-		if ($octet2 > 255) {
-			$octet2 = 0;
-			$octet3++;
-			if ($octet3 > 255) {
-				$octet3 = 0;
-				$octet4++;
-			}
-		}
+	for ($i = 0; $i < $valeur; $i++) {
 	}
-	$octet1 = $valeur;
-	echo $octet4 . "." . $octet3 ."." . $octet2 . "." . ($octet1-1);
-}
+	echo $octet4 . "." . $octet3 ."." . $octet2 . "." . $octet1;
+	}
 
  ?>

@@ -35,29 +35,29 @@
 <?php 
 	if ($_POST) {
 	$mike = explode(" ", $_POST['Mike']);
-		if (count($mike) == 3) {
+		if (count($mike) < 3 || count($mike) > 3){
+			echo "Nombre de paramètres incorrect";
+		}
+		elseif(count($mike) == 3) {
 			switch ($mike[1]) {
 				case '+':
-				echo intval($mike[0] + $mike[2]);
+				echo floatval($mike[0] + $mike[2]);
 				break;
 				case '-':
-				echo intval($mike[0] - $mike[2]);
+				echo floatval($mike[0] - $mike[2]);
 				break;
 				case '*':
-				echo intval($mike[0] * $mike[2]);
+				echo floatval($mike[0] * $mike[2]);
 				break;
 				case '/':
 					if ($mike[2] == '0') {
 						echo "Division par 0";
 					}
 					else{
-						echo intval($mike[0]) / intval($mike[2]);
+						echo floatval($mike[0]) / floatval($mike[2]);
 					}
 				break;
 			}
-		}
-		else{
-			echo "Nombre de paramètres incorrect";
 		}
 	}
 

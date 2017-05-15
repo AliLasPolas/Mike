@@ -35,7 +35,8 @@
 <?php 
 
 if ($_POST) {
-	$mike = explode(" ", $_POST['Mike']);
+	$mike = trim($_POST['Mike']);
+	$mike = explode(" ", $mike);
 	// echo ctype_digit($mike[1]);
 	// echo ctype_digit($mike[2]);
 	// echo count($mike);
