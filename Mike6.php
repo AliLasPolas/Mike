@@ -32,16 +32,27 @@
 	</body>
 </html>
 
-<?php 
+<?php
+	$resultat = " ";
 	if ($_POST) {
+	$mike = trim($_POST['Mike']);
 	$mike = explode(" ", $_POST['Mike']);
-		if (count($mike) < 3 || count($mike) > 3){
-			echo "Nombre de paramètres incorrect";
+
+		if(count($mike) < 3 || count($mike) > 3){
+			echo "Nombre de paramètres incorrect <br>";
 		}
-		elseif(count($mike) == 3) {
+		elseif (!is_numeric($mike[0]) || !is_numeric($mike[2]) ) {
+			echo "Erreur de saisie";
+		}
+		elseif($mike[1] != "+" && $mike[1] != "-" && $mike[1] != "*" && $mike[1] != "/" && $mike[1] != "%"){
+			echo "Erreur de saisie";		}
+		else{
 			switch ($mike[1]) {
 				case '+':
 				echo floatval($mike[0] + $mike[2]);
+				break;
+				case '%':
+				echo floatval($mike[0] % $mike[2]);
 				break;
 				case '-':
 				echo floatval($mike[0] - $mike[2]);
@@ -51,7 +62,7 @@
 				break;
 				case '/':
 					if ($mike[2] == '0') {
-						echo "Division par 0";
+						echo "Expression invalide";
 					}
 					else{
 						echo floatval($mike[0]) / floatval($mike[2]);
@@ -60,5 +71,4 @@
 			}
 		}
 	}
-
  ?>

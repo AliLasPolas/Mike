@@ -35,10 +35,17 @@
 <?php 
 	$tmp = "";
 	if ($_POST) {
+	$mike = trim($_POST['Mike']);
 	$mike = explode(" ", $_POST['Mike']);
+
 	if (count($mike) < 3 ||count($mike) > 3) {
 		echo "Nombre de paramètres incorrect";
 	}
+	elseif (!is_numeric($mike[0]) || 
+		!is_numeric($mike[1]) || 
+		!is_numeric($mike[2])) {
+	 	echo "Veuillez entrer 3 entiers";
+	 }
 	elseif(count($mike) == 3) {
 		if (floatval($mike[0]) > floatval($mike[1])) {
 				$tmp = $mike[0];

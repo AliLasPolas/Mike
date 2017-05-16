@@ -34,6 +34,7 @@
 
 <?php 
 	if ($_POST) {
+	$mike = trim($_POST['Mike']);
 	$mike = explode(" ", $_POST['Mike']);
 		if (count($mike) == 2) {
 			if ($mike[0] > $mike[1] ) {

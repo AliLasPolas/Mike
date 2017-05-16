@@ -35,34 +35,53 @@
 <?php 
 
 if ($_POST) {
+	$erreur = "";
 	$resultat_essence = 0;
 	$resultat_diesel = 0;
 	$distance_essence = 0;
 	$distance_diesel = 0;
 	$mike = trim($_POST['Mike']);
 	$mike = explode(" ", $mike);
-	if (count($mike) == 2) {
-		$distance = floatval($mike[0]);
-		$duree = floatval($mike[1]);
-		$distance_essence = $distance*0.13;
-		$distance_diesel = $distance*0.11;
-		$distance_essence < 10 ? $distance_essence = 10 : '' ;
-		$distance_diesel < 8 ? $distance_diesel = 8 : '' ;
+	if (count($mike) != 2) {
+		die("Erreur de saisie");
+	}
+	if (is_numeric($mike[0]) || is_numeric($mike[1]) ) {
+		if (count($mike) == 2) {
+			if ($mike[1] > 0 && $mike[0] > 0) {
+				
+			$distance = floatval($mike[0]);
+			$duree = floatval($mike[1]);
+			$distance_essence = $distance*0.13;
+			$distance_diesel = $distance*0.11;
+			$distance_essence < 10 ? $distance_essence = 10 : '' ;
+			$distance_diesel < 8 ? $distance_diesel = 8 : '' ;
 
-		$resultat_essence = ($duree * 30) + ($distance_essence);
-		$resultat_essence *=1.196;
-		$resultat_essence = round($resultat_essence, 2);
-		$resultat_diesel = ($duree * 33.4) + ($distance_diesel);
-		$resultat_diesel *= 1.196;
-		$resultat_diesel = round($resultat_diesel, 2);
-			echo "Distance : $distance kilomètres, Durée : $duree jours, Total diesel: $resultat_diesel €, Total essence: $resultat_essence € ";
-		if ($resultat_diesel > $resultat_essence) {
-			echo "Meilleur prix: Essence";
+			$resultat_essence = ($duree * 30) + ($distance_essence);
+			$resultat_essence *=1.196;
+			$resultat_essence = round($resultat_essence, 2);
+			$resultat_diesel = ($duree * 33.4) + ($distance_diesel);
+			$resultat_diesel *= 1.196;
+			$resultat_diesel = round($resultat_diesel, 2);
+				echo "Distance : $distance kilomètres, Durée : $duree jours, Total essence: $resultat_essence € , Total diesel: $resultat_diesel € ";
+			if ($resultat_diesel > $resultat_essence) {
+				echo "Meilleur prix: Essence";
+			}
+			else{
+				echo "Meilleur prix : Diesel";
+			}
+			}	
+			else{
+				$erreur = "Erreur de nombre";
+			}
 		}
 		else{
-			echo "Meilleur prix : Diesel";
+			$erreur = "Erreur de saisie";
 		}
 	}
-}
+	else{
+		$erreur = "Erreur de saisie";
+	}
+	echo $erreur;
+	}
 
  ?>

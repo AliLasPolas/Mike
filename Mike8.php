@@ -41,10 +41,36 @@ $octet4 = 0;
 
 
 if ($_POST) {
-$valeur = doubleval($_POST['Mike']);
-	for ($i = 0; $i < $valeur; $i++) {
+	if (is_numeric($_POST['Mike']) ) {
+		$valeur = trim($_POST['Mike']);
+		$valeur = doubleval($valeur);
+		if ($valeur > 4294967295 || $valeur < 1 ) {
+			echo "Erreur, entrez un entier entre 1 et 4294967295";	
+		}
+		elseif($valeur < 4294967295 || $valeur > 0){
+		while ($valeur > 255) {
+			$valeur -= 256;
+			$octet2++;
+			if ($octet2 > 255) {
+				$octet2++;
+				$octet1 = 0;
+				if ($octet2 > 255) {
+					$octet3++;
+					$octet2 = 0;
+					if ($octet3 > 255) {
+						$octet4++;
+						$octet3 = 0;
+					}
+				}
+			}
+		}
+		$octet1 = $valeur;
+		echo $octet4 . "." . $octet3 ."." . $octet2 . "." . $octet1;
+		}
 	}
-	echo $octet4 . "." . $octet3 ."." . $octet2 . "." . $octet1;
+	else{
+		echo "Erreur de saisie";
 	}
+}
 
  ?>
